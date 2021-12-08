@@ -1,7 +1,5 @@
 package de.kramhal.aoc.twentyone
 
-import resource
-
 /**
  * Now, you need to figure out how to pilot this thing.
 

@@ -1,4 +1,5 @@
-import java.io.File
+package de.kramhal.aoc.twentyone
+
 import java.math.BigInteger
 import java.security.MessageDigest
 
