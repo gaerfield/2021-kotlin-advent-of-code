@@ -48,6 +48,25 @@ data class BingoGame(
         }
         return null
     }
+
+    fun lastBoardToWin(): BingoBoard? {
+        val boardsStillInTheGame = boards.toMutableList()
+        drawnNumbers.forEach { currentNumber ->
+            boardsStillInTheGame.forEach { it.mark(currentNumber) }
+            if(boardsStillInTheGame.size > 1) {
+                val winnerBoard = boards.filter { it.hasWon() }
+                boardsStillInTheGame.removeAll(winnerBoard)
+            } else if(boardsStillInTheGame.isEmpty() ) {
+                throw IllegalStateException()
+            } else {
+                val lastBoard = boardsStillInTheGame[0]
+                lastBoard.mark(currentNumber)
+                if(lastBoard.hasWon())
+                    return lastBoard
+            }
+        }
+        return null
+    }
 }
 
 fun parseGame(input: List<String>) = BingoGame(
@@ -65,7 +84,11 @@ fun part1(input: List<String>): Int {
     val winnerBoard = game.play()
     return winnerBoard?.score() ?: -1
 }
-fun part2(input: List<String>): Int { return 0 }
+fun part2(input: List<String>): Int {
+    val game = parseGame(input)
+    val winnerBoard = game.lastBoardToWin()
+    return winnerBoard?.score() ?: -1
+}
 
 fun main() {
     println(part1(resource("Day04.txt")))

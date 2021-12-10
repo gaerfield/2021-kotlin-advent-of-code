@@ -46,6 +46,6 @@ internal class Day04Test {
 
     @Test
     fun part2() {
-        assertEquals(0, part2(emptyList()))
+        assertEquals(1924, part2(testValues))
     }
 }
